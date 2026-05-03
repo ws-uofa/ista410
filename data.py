@@ -58,7 +58,6 @@ for ds_name in BEIR_DATASETS:
     url = f"https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/{ds_name}.zip"
     data_path = util.download_and_unzip(url, out_dir)
     corpus_beir = GenericDataLoader(data_path).load(split="test")[0]
-    # 限制样本以防推断时间过长
     texts = [f"{doc.get('title','')} {doc.get('text','')}".strip() for i, doc in enumerate(corpus_beir.values()) if i < 200]
     beir_texts_dict[ds_name] = texts
 
